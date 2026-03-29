@@ -44,9 +44,10 @@ public static class AzureBlobUploader
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = "az",
-                Arguments =
-                    $"storage container generate-sas --account-name {accountName} --name {containerName} --permissions {permissions} --expiry {expiryStr} --https-only --output tsv",
+                FileName = OperatingSystem.IsWindows() ? "cmd.exe" : "az",
+                Arguments = OperatingSystem.IsWindows()
+                    ? $"/c az storage container generate-sas --account-name {accountName} --name {containerName} --permissions {permissions} --expiry {expiryStr} --https-only --output tsv"
+                    : $"storage container generate-sas --account-name {accountName} --name {containerName} --permissions {permissions} --expiry {expiryStr} --https-only --output tsv",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
