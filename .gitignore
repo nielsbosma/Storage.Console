@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+nupkgs/
+
+# Configuration files with secrets
+config.yaml
+src/config.yaml
